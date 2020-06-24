@@ -1,4 +1,7 @@
 # Satellite Passage
+
+Author: Lara Ferrighi, laraf@met.no
+
 This module uses a OL3 map to diplay Sentinel-1 and Sentinel-2 future acquisition plans as retrived from ESA: 
 
 - https://sentinel.esa.int/web/sentinel/missions/sentinel-1/observation-scenario/acquisition-segments
