@@ -1,5 +1,5 @@
 name = Satellite Passage Module
-description = "OL map showing the KML file from ESA with future acquisition plans on top of a basis map"
+description = "Openlayers (OL) map showing the dataset from ESA in KML format, with future acquisition plans on top of a basis map"
 core = 7.x
 
 scripts[] = js/olmap_slider.js
