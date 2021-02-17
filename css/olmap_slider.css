@@ -1,0 +1,75 @@
+.map {
+  height: 500px;
+  width: 100%;
+  margin: auto;
+}
+#info {
+  height: 1px;
+  width: 1px;
+  z-index: 100;
+  left: 200px;
+  top: 100px;
+}
+.fu_popover {
+  max-width: unset;
+  left: 200px;
+  top: 100px;
+}
+.fu_popover table tr td {
+  padding: 0 2px 0 2px;
+}
+.fu_popover.top {
+  left:10px;
+}
+.fu_popover.top .arrow{
+  display: none;
+}
+
+.fu_popover {
+  max-width: unset;
+  left: 200px;
+  top: 100px;
+}
+.fu_fu_popover table tr td {
+  padding: 0 2px 0 2px;
+}
+.fu_fu_popover.top {
+  left:10px;
+}
+.fu_fu_popover.top .arrow{
+  display: none;
+}
+
+#timeStart-kml,#timeEnd-kml {
+  vertical-align: middle;
+  background: #d3d3d3;
+  border-radius: 5px;
+}
+#timeStart-kml::-moz-range-thumb,
+#timeEnd-kml::-moz-range-thumb  {
+width: 15px;
+height: 15px;
+border-radius: 50%;
+background: #81b6da;
+border-color: #000;
+border-width: 1px;
+cursor: pointer;
+}
+.controls {
+   text-align: center;
+}
+.date {
+   border:unset;
+   width: 300px;
+}
+.ol-mouse-position {
+   font-size: 14px;
+   background-color: rgba(0,89,163,0.5);
+   border-radius: 4px;
+   padding: 2px;
+   color: #000;
+}
+
+.fu_popover_default {
+  width: 25em !important;
+}

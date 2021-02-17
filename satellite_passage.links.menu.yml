@@ -1,0 +1,13 @@
+#Define menu links here
+satellite_passage:
+  title: 'Sentinel Aquasition Tool'
+  description: 'Sentinel Aquasition Tool'
+  route_name: satellite_passage
+  parent: metsis.services
+  weight: 99
+
+metsis.services:
+  title: 'Services'
+  route_name: mosaic.main
+  description: "METSIS Services"
+  menu_name: main

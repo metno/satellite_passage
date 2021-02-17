@@ -1,6 +1,10 @@
-# Satellite Passage
+# Satellite Passage for Drupal 8
 
 Author: Lara Ferrighi, laraf@met.no
+
+
+Ported to Drupal by Magnar Martinsen, magnarem@met.no
+
 
 This module uses a OL3 map to diplay Sentinel-1 and Sentinel-2 future acquisition plans as retrived from ESA: 
 
@@ -19,9 +23,8 @@ To know more about the satellite acquisition (i.e. ID, Mode, Observation Time, e
 Filtering for specific satellites can be achieved using the layer switcher icon on the top right corner.
 
 ## Dependecies
-This modules depend on libraries, OL3 and ol-switcher, and requires kml files to be available under the files/kml folder.
+This modules depend on libraries, OL6 and ol-ext (http://viglino.github.io/), and requires kml files to be available under the files/kml folder.
 KML files are harvested using: https://github.com/hevgyrt/harvest_sentinel_acquisition_plans
 
 ## How to enable the module 
-The module creates a block "Sentinel Passage" that can be placed on any page. 
-
+Enable the module. The tool will be available at uri: <sitename>/services/acquisition 

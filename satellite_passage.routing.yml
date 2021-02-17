@@ -1,0 +1,7 @@
+satellite_passage:
+  path: '/services/acquisition'
+  defaults:
+    _controller: '\Drupal\satellite_passage\Controller\SatellitePassageController::render'
+    _title: 'Sentinel Acquisition Plan'
+  requirements:
+    _permission: 'access content'
