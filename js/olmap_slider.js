@@ -97,7 +97,7 @@ console.log("Start of satellite_passage map script:");
         layer['kml2A'] = new ol.layer.Vector({
           title: 'Sentinel-2A',
           source: new ol.source.Vector({
-            url: /sites/'+ site_name +'/files/kml/S2A_acquisition_plan_norwAOI.kml',
+            url: '/sites/'+ site_name +'/files/kml/S2A_acquisition_plan_norwAOI.kml',
             format: new ol.format.KML({
               extractStyles: false,
               extractAttributes: true
