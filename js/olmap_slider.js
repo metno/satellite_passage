@@ -7,6 +7,10 @@ console.log("Start of satellite_passage map script:");
     attach: function(context, drupalSettings) {
       $('#map', context).once().each(function() {
 
+
+        //Get the site name
+        var site_name = drupalSettings.satellite_passage.site_name;
+
         // define some interesting projections
         // WGS 84 / EPSG Norway Polar Stereographic
         proj4.defs('EPSG:5939', '+proj=stere +lat_0=90 +lat_ts=90 +lon_0=18 +k=0.994 +x_0=2000000 +y_0=2000000 +datum=WGS84 +units=m +no_defs');
@@ -70,7 +74,7 @@ console.log("Start of satellite_passage map script:");
         layer['kml1A'] = new ol.layer.Vector({
           title: 'Sentinel-1A',
           source: new ol.source.Vector({
-            url: '/sites/satellittdata.metsis.met.no/files/kml/S1A_acquisition_plan_norwAOI.kml',
+            url: '/sites/'+ site_name +'/files/kml/S1A_acquisition_plan_norwAOI.kml',
             format: new ol.format.KML({
               extractStyles: false,
               extractAttributes: true
@@ -82,7 +86,7 @@ console.log("Start of satellite_passage map script:");
         layer['kml1B'] = new ol.layer.Vector({
           title: 'Sentinel-1B',
           source: new ol.source.Vector({
-            url: '/sites/satellittdata.metsis.met.no/files/kml/S1B_acquisition_plan_norwAOI.kml',
+            url: '/sites/'+ site_name +'/files/kml/S1B_acquisition_plan_norwAOI.kml',
             format: new ol.format.KML({
               extractStyles: false,
               extractAttributes: true
@@ -93,7 +97,7 @@ console.log("Start of satellite_passage map script:");
         layer['kml2A'] = new ol.layer.Vector({
           title: 'Sentinel-2A',
           source: new ol.source.Vector({
-            url: '/sites/satellittdata.metsis.met.no/files/kml/S2A_acquisition_plan_norwAOI.kml',
+            url: /sites/'+ site_name +'/files/kml/S2A_acquisition_plan_norwAOI.kml',
             format: new ol.format.KML({
               extractStyles: false,
               extractAttributes: true
@@ -105,7 +109,7 @@ console.log("Start of satellite_passage map script:");
         layer['kml2B'] = new ol.layer.Vector({
           title: 'Sentinel-2B',
           source: new ol.source.Vector({
-            url: '/sites/satellittdata.metsis.met.no/files/kml/S2B_acquisition_plan_norwAOI.kml',
+            url: '/sites/'+ site_name +'/files/kml/S2B_acquisition_plan_norwAOI.kml',
             format: new ol.format.KML({
               extractStyles: false,
               extractAttributes: true

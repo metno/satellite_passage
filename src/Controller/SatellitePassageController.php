@@ -29,7 +29,10 @@ class SatellitePassageController extends ControllerBase {
 
 
             'drupalSettings' => [
-          
+              'satellite_passage' => [
+                'site_name' => $site_name,
+              ]
+
           ],
           ],
           '#cache' => [

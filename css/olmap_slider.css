@@ -47,8 +47,8 @@
 }
 #timeStart-kml::-moz-range-thumb,
 #timeEnd-kml::-moz-range-thumb  {
-width: 15px;
-height: 15px;
+width: 25px;
+height: 25px;
 border-radius: 50%;
 background: #81b6da;
 border-color: #000;
@@ -60,7 +60,7 @@ cursor: pointer;
 }
 .date {
    border:unset;
-   width: 300px;
+   width: 500px;
 }
 .ol-mouse-position {
    font-size: 14px;
