@@ -10,7 +10,7 @@ console.log("Start of satellite_passage map script:");
 
         //Get the site name
         var site_name = drupalSettings.satellite_passage.site_name;
-        var defzoom =   var site_name = drupalSettings.satellite_passage.defzoom;
+        var defzoom = drupalSettings.satellite_passage.defzoom;
         var lon = drupalSettings.satellite_passage.lon;
         var lat = drupalSettings.satellite_passage.lat;
         // define some interesting projections

@@ -20,9 +20,9 @@ class SatellitePassageController extends ControllerBase {
         $host = \Drupal::request()->getHost();
 
         $config = \Drupal::config('satellite_passage.configuration');
-        $zoom_level = $config->get('defzoom');
-        $center_lat = $config->get('lat');
-        $center_lon = $config->get('lon');
+        $defzoom = $config->get('defzoom');
+        $lat = $config->get('lat');
+        $lon = $config->get('lon');
         $helptext = Markup::create($config->get('helptext')['value']);
 
 
