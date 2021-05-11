@@ -1,0 +1,7 @@
+lon: 19
+lat: 86
+defzoom: 2
+langcode: en
+helptext:
+  value: '<p>The KML files available on this page are retrieved from the <a href="https://sentinel.esa.int/web/sentinel/missions/sentinel-2/acquisition-plans">ESA website</a> and filtered to provide detailed information about the planned Sentinel-2 acquisitions within the Norwegian area of interst. Each KML file usually covers a period of 10-15 days. To select the time period slide the <strong>Start</strong> and <strong>End</strong> buttons below the map.</p><p>To know more about the satellite acquisition (i.e. ID, Mode, Observation Time, ect...) click on the passage stripe. When passing with the mouse on the passage stripe:</p><ul><li>Passages of Sentinel-2A and Sentinel-2B are highlighted in <strong>red</strong>.</li><li>Passages of Sentinel-1A and Sentinel-1B are highlighted in <strong>blue</strong> for EW mode (sea) and <strong>green</strong> for IW mode (land).</li></ul><p>Filtering for specific satellites can be achieved using the layer switcher icon on the top right corner.</p>'
+  format: 'basic_html'

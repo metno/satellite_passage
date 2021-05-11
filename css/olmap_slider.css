@@ -58,6 +58,10 @@ cursor: pointer;
 .controls {
    text-align: center;
 }
+
+.controls label {
+  font-weight: bold;
+}
 .date {
    border:unset;
    width: 500px;

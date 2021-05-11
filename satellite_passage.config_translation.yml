@@ -1,0 +1,5 @@
+satellite_passage.configuration:
+  title: 'Satellite passage  configuration'
+  base_route_name: satellite_passage.admin_config_form
+  names:
+    - satellite_passage.configuration

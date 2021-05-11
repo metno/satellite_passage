@@ -17,11 +17,20 @@ class SatellitePassageController extends ControllerBase {
     public function render(){
         $config = \Drupal::config('system.site');
         $site_name = $config->get('name');
+        $host = \Drupal::request()->getHost();
+
+        $config = \Drupal::config('satellite_passage.configuration');
+        $zoom_level = $config->get('defzoom');
+        $center_lat = $config->get('lat');
+        $center_lon = $config->get('lon');
+        $helptext = Markup::create($config->get('helptext')['value']);
+
 
         return [
             '#type' => 'container',
             '#theme' => 'satellite_passage-template',
             '#site_name' => $site_name,
+            '#helptext' => $helptext,
             '#attached' => [
               'library' => [
                 'satellite_passage/satellite_passage',
@@ -30,8 +39,11 @@ class SatellitePassageController extends ControllerBase {
 
             'drupalSettings' => [
               'satellite_passage' => [
-                'site_name' => $site_name,
-              ]
+                'site_name' => $host,
+                'lon' => $lon,
+                'lat' => $lat,
+                'defzoom' => $defzoom,
+              ],
 
           ],
           ],

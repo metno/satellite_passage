@@ -10,7 +10,9 @@ console.log("Start of satellite_passage map script:");
 
         //Get the site name
         var site_name = drupalSettings.satellite_passage.site_name;
-
+        var defzoom =   var site_name = drupalSettings.satellite_passage.defzoom;
+        var lon = drupalSettings.satellite_passage.lon;
+        var lat = drupalSettings.satellite_passage.lat;
         // define some interesting projections
         // WGS 84 / EPSG Norway Polar Stereographic
         proj4.defs('EPSG:5939', '+proj=stere +lat_0=90 +lat_ts=90 +lon_0=18 +k=0.994 +x_0=2000000 +y_0=2000000 +datum=WGS84 +units=m +no_defs');
@@ -21,13 +23,13 @@ console.log("Start of satellite_passage map script:");
         ol.proj.addProjection(proj5939);
 
         // WGS 84 -- WGS84 - World Geodetic System 1984
-        proj4.defs('EPSG:4326', '+proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees');
+/*        proj4.defs('EPSG:4326', '+proj=longlat +ellps=WGS84 +datum=WGS84 +units=degrees');
         ol.proj.proj4.register(proj4);
         var proj4326 = ol.proj.get('EPSG:4326');
         var ex4326 = [-90, 30, 90, 90];
         proj4326.setExtent(ex4326);
         ol.proj.addProjection(proj4326);
-
+*/
         // WGS 84 / North Pole LAEA Europe
         proj4.defs('EPSG:3575', '+proj=laea +lat_0=90 +lon_0=10 +x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs');
         ol.proj.proj4.register(proj4);
@@ -37,25 +39,59 @@ console.log("Start of satellite_passage map script:");
         ol.proj.addProjection(proj3575);
 
         // WGS 84 / UPS North (N,E)
-        proj4.defs('EPSG:32661', '+proj=stere +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +datum=WGS84 +units=m +no_defs');
+    /*    proj4.defs('EPSG:32661', '+proj=sterea +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +datum=WGS84 +units=m +no_defs');
         ol.proj.proj4.register(proj4);
         var proj32661 = ol.proj.get('EPSG:32661');
         var ex32661 = [-4e+06, -6e+06, 8e+06, 8e+06];
         proj32661.setExtent(ex32661);
         ol.proj.addProjection(proj32661);
+*/
+/*
+        proj4.defs(
+  'EPSG:3413',
+  '+proj=stere +lat_0=90 +lat_ts=70 +lon_0=-45 +k=1 ' +
+    '+x_0=0 +y_0=0 +datum=WGS84 +units=m +no_defs'
+);
+    ol.proj.proj4.register(proj4);
+var proj3413 = ol.proj.get('EPSG:3413');
+proj3413.setExtent([-4194304, -4194304, 4194304, 4194304]);
+*/
 
+// 32661
+/* proj4.defs('EPSG:32661', '+proj=stere +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +datum=WGS84 +units=m +no_defs');
+ol.proj.proj4.register(proj4);
+var ext32661 = [-6e+06, -3e+06, 9e+06, 6e+06];
+var center32661 = [0.0, 80.0];
+var proj32661 = new ol.proj.Projection({
+  code: 'EPSG:32661',
+  extent: ext32661
+});
+*/
 
+// WGS 84 / UPS North (N,E)
+proj4.defs('EPSG:32661', '+proj=stere +lat_0=90 +lat_ts=90 +lon_0=0 +k=0.994 +x_0=2000000 +y_0=2000000 +ellps=WGS84 +datum=WGS84 +units=m +no_defs ');
+ol.proj.proj4.register(proj4);
+var proj32661 = ol.proj.get('EPSG:32661');
+var ex32661 = [-4e+06, -6e+06, 8e+06, 8e+06];
+proj32661.setExtent(ex32661);
+proj32661.setGlobal(true);
+ol.proj.addProjection(proj32661);
+
+var ext = ex32661;
+var prj = proj32661;
 
         //var ext = ex5939;
         //var prj = proj5939;
-        var ext = ex32661;
-        var prj = proj32661;
+        //var ext = ext32661;
+        //var prj = proj32661;
         //var ext = ex3575;
-        //var prj = proj3575;
+        ///var prj = proj3575;
         //var ext = ex4326;
         //var prj = proj4326;
-
-        var tromsoLonLat = [19, 68];
+        //var prj = proj3413;
+        //var ext =  proj3413.getExtent();
+        var tromsoLonLat = [lon, lat];
+        //var tromsoLonLat = [68.0, 19.0];
         var tromsoTrans = ol.proj.transform(tromsoLonLat, "EPSG:4326", prj);
 
 
@@ -65,15 +101,29 @@ console.log("Start of satellite_passage map script:");
         layer['base'] = new ol.layer.Tile({
           title: 'base',
           baseLayer: true,
-          displayInLayerSwitcher: false,
+          //displayInLayerSwitcher: false,
           type: 'base',
           source: new ol.source.OSM({
           })
         });
+
+        var stamenTerrain = new ol.layer.Tile({
+          title: "stamenTerrain",
+          baseLayer: true,
+          //visible: false,
+          source: new ol.source.XYZ({
+            attributions: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
+            url: 'https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.jpg',
+            crossOrigin: 'anonymous',
+          }),
+        });
+
         // feature layer KML
         layer['kml1A'] = new ol.layer.Vector({
           title: 'Sentinel-1A',
+          opacity: 0.4,
           source: new ol.source.Vector({
+            //projection: 'EPSG:4326',
             url: '/sites/'+ site_name +'/files/kml/S1A_acquisition_plan_norwAOI.kml',
             format: new ol.format.KML({
               extractStyles: false,
@@ -85,7 +135,9 @@ console.log("Start of satellite_passage map script:");
         // feature layer KML
         layer['kml1B'] = new ol.layer.Vector({
           title: 'Sentinel-1B',
+          opacity: 0.4,
           source: new ol.source.Vector({
+            //projection: 'EPSG:4326',
             url: '/sites/'+ site_name +'/files/kml/S1B_acquisition_plan_norwAOI.kml',
             format: new ol.format.KML({
               extractStyles: false,
@@ -96,8 +148,10 @@ console.log("Start of satellite_passage map script:");
         // feature layer KML
         layer['kml2A'] = new ol.layer.Vector({
           title: 'Sentinel-2A',
+          opacity: 0.4,
           source: new ol.source.Vector({
-            url: '/sites/'+ site_name +'/files/kml/S2A_acquisition_plan_norwAOI.kml',
+            //projection: 'EPSG:4326',
+            url: '  /sites/'+ site_name +'/files/kml/S2A_acquisition_plan_norwAOI.kml',
             format: new ol.format.KML({
               extractStyles: false,
               extractAttributes: true
@@ -108,7 +162,10 @@ console.log("Start of satellite_passage map script:");
         // feature layer KML
         layer['kml2B'] = new ol.layer.Vector({
           title: 'Sentinel-2B',
+          opacity: 0.4,
           source: new ol.source.Vector({
+            //wrapX: true,
+            //projection: 'EPSG:4326',
             url: '/sites/'+ site_name +'/files/kml/S2B_acquisition_plan_norwAOI.kml',
             format: new ol.format.KML({
               extractStyles: false,
@@ -120,21 +177,31 @@ console.log("Start of satellite_passage map script:");
 
         // build up the map
         var map = new ol.Map({
+          controls: ol.control.defaults().extend([
+            new ol.control.FullScreen()
+          ]),
           target: 'map',
-          layers: [layer['base'],
+          layers: [
+            //layer['base'],
+            stamenTerrain,
             layer['kml1A'],
             layer['kml1B'],
             layer['kml2A'],
             layer['kml2B']
           ],
           view: new ol.View({
-            zoom: 2,
-            minZoom: 2,
+            zoom: defzoom,
+            minZoom: 1,
+            mazZoom:  8,
             center: tromsoTrans,
+            //projection: 'EPSG:32661',
+            extent: ext,
             projection: prj,
-            extent: ext
           })
         });
+        console.log("Created map with projection object: ");
+        console.log(prj);
+
         var layerSwitcher = new ol.control.LayerSwitcher({
           collapsed: false,
           reordering: false,
@@ -191,6 +258,7 @@ console.log("Start of satellite_passage map script:");
 
         // Get the observation time from the kml file
         function updateTimeSelection(endChanged) {
+
           var minObs, maxObs;
           for (var i12 = 1; i12 <= 4; i12++) {
             map.getLayers().getArray()[i12].getSource().forEachFeature(function(feature) {
@@ -227,6 +295,8 @@ console.log("Start of satellite_passage map script:");
               }
             });
           }
+          var boxEnd = document.getElementById('boxEnd');
+          var boxStart = document.getElementById('boxStart');
           // print and update the selected date only when moving the slider
           if (endChanged) {
             boxEnd.value = selectedTimeEnd;
@@ -239,12 +309,16 @@ console.log("Start of satellite_passage map script:");
           }
         }
         //Update time of the selector
-        timeSelectStart.onchange = function() {
+    /*    timeSelectStart.onchange = function() {
           updateTimeSelection(false);
         };
         timeSelectEnd.onchange = function() {
           updateTimeSelection(true);
         };
+*/
+        $('#timeStartKml').on('input', function() {updateTimeSelection(false)});
+        $('#timeEndKml').on('input', function() {updateTimeSelection(true)});
+
 
         // Get the observation time from the kml file
         function updateTimeSelectionLayer(endChanged,layer) {
@@ -294,12 +368,13 @@ console.log("Start of satellite_passage map script:");
           }
         }
         //Update time of the selector
-        timeSelectStart.onchange = function() {
+       timeSelectStart.onchange = function() {
           updateTimeSelection(false);
         };
         timeSelectEnd.onchange = function() {
           updateTimeSelection(true);
         };
+
 
         // Define the position of today to set the start value of the slider
         function initialize_today() {
@@ -377,6 +452,7 @@ console.log("Start of satellite_passage map script:");
                 timeSelectStart.value = initialize_today();
                 updateTimeSelection(false);
                 updateTimeSelection(true);
+                this.refresh();
               }
             });
 

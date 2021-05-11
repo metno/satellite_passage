@@ -11,3 +11,17 @@ metsis.services:
   route_name: metsis.services
   description: "METSIS Services"
   menu_name: main
+
+satellite_passage.admin_config_form:
+  title: 'Satellite Passage configuration'
+  description: 'Configure Satellite_passage'
+  route_name: satellite_passage.admin_config_form
+  parent: metsis.group.admin
+  weight: 99
+
+metsis.group.admin:
+  title: 'METSIS'
+  route_name: system.admin_config_metsis
+  parent: system.admin_config
+  description: 'METSIS Configuration'
+  weight: -999

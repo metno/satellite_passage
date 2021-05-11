@@ -10,8 +10,9 @@ satellite_passage:
       css/olmap_slider.css: {}
   js:
     js/popover.min.js: {}
-    /libraries/proj4js-2.6.3/dist/proj4.js: {}
+
     /libraries/openlayers-6.5.0/ol.js: {}
+    /libraries/proj4js-2.6.3/dist/proj4.js: {}
 #    /libraries/ol-layerswitcher-3.8.3/dist/ol-layerswitcher.js: {}
     /libraries/ol-ext-3.1.17/dist/ol-ext.js: {}
 #    js/ol-ext.js: {}

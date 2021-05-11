@@ -3,5 +3,5 @@ description: 'OL map showing the KML file from ESA with future acquisition plans
 type: module
 core: 8.x
 version: 1.x
-package: METNO
+package: METSIS
 dependencies:

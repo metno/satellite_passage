@@ -28,6 +28,7 @@ function satellite_passage_theme( $existing, $type, $theme, $path ){
             'template' => 'satellite_passage', // My template file name
             'variables' => [
                 'site_name' => "Default",
+                'helptext' => '',
               ],
         ],
     ];
