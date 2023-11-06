@@ -1,0 +1,10 @@
+{
+    "name": "metno/satellite_passage",
+    "type": "drupal-custom-module",
+    "description": "'OL map showing the KML file from ESA with future acquisition plans on top of a basis map.",
+    "license": "GPL-3.0-or-later",
+    "scripts": {
+        "sniff": "phpcs --colors -n --standard=Drupal --extensions=php,module,yml src",
+        "snifferfix": "phpcbf --colors -n --standard=Drupal --extensions=php,module,yml src"
+    }
+}

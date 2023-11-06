@@ -1,56 +1,83 @@
 <?php
+
 namespace Drupal\satellite_passage\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\Render\Markup;
-use Drupal\search_api\Entity\Index;
-use Drupal\search_api\Query\QueryInterface;
-use Solarium\QueryType\Select\Query\Query;
-use Drupal\search_api_solr\Plugin\search_api\backend\SearchApiSolrBackend;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Drupal\Component\Serialization\Json;
+use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
 
-
+/**
+ * Controller for showing the aquasition plan map.
+ */
 class SatellitePassageController extends ControllerBase {
+  /**
+   * The request stack service.
+   *
+   * @var Symfony\Component\HttpFoundation\RequestStack
+   */
+  protected $request;
 
-    public function render(){
-        $config = \Drupal::config('system.site');
-        $site_name = $config->get('name');
-        $host = \Drupal::request()->getHost();
+  /**
+   * {@inheritdoc}
+   */
+  public function __construct(RequestStack $request) {
+    $this->request = $request;
+  }
 
-        $config = \Drupal::config('satellite_passage.configuration');
-        $defzoom = $config->get('defzoom');
-        $lat = $config->get('lat');
-        $lon = $config->get('lon');
-        $helptext = Markup::create($config->get('helptext')['value']);
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    // $instance = parent::create($container);
+    // $instance->request = $container->get('request_stack');
+    // return $instance;
+    return new static($container->get('request_stack'));
+  }
 
-
-        return [
-            '#type' => 'container',
-            '#theme' => 'satellite_passage-template',
-            '#site_name' => $site_name,
-            '#helptext' => $helptext,
-            '#attached' => [
-              'library' => [
-                'satellite_passage/satellite_passage',
-              ],
-
-
-            'drupalSettings' => [
-              'satellite_passage' => [
-                'site_name' => $host,
-                'lon' => $lon,
-                'lat' => $lat,
-                'defzoom' => $defzoom,
-              ],
-
-          ],
-          ],
-          '#cache' => [
-            'max-age' => 0,
-          ],
-        ];
+  /**
+   * Render the map to the page.
+   */
+  public function render() {
+    $config = $this->config('system.site');
+    $site_name = $config->get('name');
+    // dpm($site_name);
+    $host = $this->request->getCurrentRequest()->getHost();
+    // dpm($host);
+    /* Handle .ddev.site special for local development */
+    if (str_contains($host, 'ddev.site')) {
+      $host = 'default';
     }
+    $config = $this->config('satellite_passage.configuration');
+    $defzoom = $config->get('defzoom');
+    $lat = $config->get('lat');
+    $lon = $config->get('lon');
+    $helptext = Markup::create($config->get('helptext')['value']);
+
+    return [
+      '#type' => 'container',
+      '#theme' => 'satellite_passage-template',
+      '#site_name' => $site_name,
+      '#helptext' => $helptext,
+      '#attached' => [
+        'library' => [
+          'satellite_passage/satellite_passage',
+        ],
+
+        'drupalSettings' => [
+          'satellite_passage' => [
+            'site_name' => $host,
+            'lon' => $lon,
+            'lat' => $lat,
+            'defzoom' => $defzoom,
+          ],
+
+        ],
+      ],
+      '#cache' => [
+        'max-age' => 0,
+      ],
+    ];
+  }
 
 }

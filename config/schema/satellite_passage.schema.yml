@@ -1,10 +1,19 @@
 satellite_passage.configuration:
   type: config_object
-  label: 'Sentinel Aquasition Plan  configuration'
+  label: 'Sentinel Aquasition Plan configuration'
   mapping:
     helptext:
       label: 'Help text to be displayed under the map'
       type: text_format
-    language:
+    langcode:
       type: string
       label: 'Language code'
+    lat:
+      type: int
+      label: 'Initial centre latitude for map'
+    lon:
+      type: int
+      label: 'Initial centre longitude for map'
+    defzoom:
+      type: int
+      label: 'Initial zoom level for map'

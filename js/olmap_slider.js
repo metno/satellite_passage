@@ -1,15 +1,18 @@
 console.log("Start of satellite_passage map script:");
-(function($, Drupal, drupalSettings) {
+(function($, Drupal, drupalSettings, once) {
 
   console.log("Attaching satellite_passage script to drupal behaviours:");
   /** Attach the metsis map to drupal behaviours function */
   Drupal.behaviors.satellitePassage = {
-    attach: function(context, drupalSettings) {
-      $('#map', context).once().each(function() {
+    attach: function(context) {
+      // $('#map', context).once().each(function() {
+      const mapEl = $(once('#map', '[data-satellite-passage]', context));
+      mapEl.each(function () {
 
 
         //Get the site name
         var site_name = drupalSettings.satellite_passage.site_name;
+        console.log(site_name);
         var defzoom = drupalSettings.satellite_passage.defzoom;
         var lon = drupalSettings.satellite_passage.lon;
         var lat = drupalSettings.satellite_passage.lat;
@@ -182,8 +185,8 @@ var prj = proj32661;
           ]),
           target: 'map',
           layers: [
-            //layer['base'],
-            stamenTerrain,
+            layer['base'],
+            //stamenTerrain,
             layer['kml1A'],
             layer['kml1B'],
             layer['kml2A'],
@@ -604,4 +607,4 @@ var prj = proj32661;
       });
     },
   };
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, drupalSettings, once);

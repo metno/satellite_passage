@@ -1,44 +1,34 @@
 <?php
-/*
- *
- * @file
- * Contains \Drupal\satellite_passage\Form\SatellitePassageConfigurationForm
- *
- * Form for Satellite passage Admin Configuration
- *
- **/
+
 namespace Drupal\satellite_passage\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
-use Drupal\Component\Utility\UrlHelper;
-use Drupal\Core\Url;
 
-/*
- *  * Class ConfigurationForm.
+/**
+ * Configuration form for satellite passage.
  *
- *  {@inheritdoc}
- *
- *   */
+ * {@inheritdoc}
+ */
 class SatellitePassageConfigurationForm extends ConfigFormBase {
 
-  /*
+  /**
    * {@inheritdoc}
-  */
+   */
   protected function getEditableConfigNames() {
     return [
       'satellite_passage.configuration',
-      ];
+    ];
   }
 
-  /*
+  /**
    * {@inheritdoc}
    */
   public function getFormId() {
     return 'satellite_passage.admin_config_form';
   }
 
-  /*
+  /**
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
@@ -70,27 +60,24 @@ class SatellitePassageConfigurationForm extends ConfigFormBase {
       '#default_value' => $config->get('helptext')['value'],
     ];
 
-    //$form['#attached']['library'][] = 'products_comparison/products_comparison';
     return parent::buildForm($form, $form_state);
- }
+  }
 
-  /*
+  /**
    * {@inheritdoc}
    *
-   * NOTE: Implement form validation here
+   * NOTE: Implement form validation here.
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
 
   }
 
-  /*
+  /**
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    /**
-     * Save the configuration
-    */
+    /* Save the configuration */
     $values = $form_state->getValues();
     $this->configFactory->getEditable('satellite_passage.configuration')
       ->set('helptext', $values['helptext'])
@@ -100,4 +87,5 @@ class SatellitePassageConfigurationForm extends ConfigFormBase {
       ->save();
     parent::submitForm($form, $form_state);
   }
+
 }
