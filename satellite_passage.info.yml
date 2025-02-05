@@ -2,7 +2,7 @@ name: 'Satellite Passage Module'
 description: 'OL map showing the KML file from ESA with future acquisition plans on top of a basis map'
 type: module
 core_version_requirement: ^8.8 || ^9 || ^10 || ^11
-version: 2.1.0
+version: 2.2.0
 configure: 'satellite_passage.admin_config_form'
 package: METSIS
 dependencies:
