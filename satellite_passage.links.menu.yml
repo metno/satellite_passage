@@ -1,7 +1,7 @@
 #Define menu links here
 satellite_passage:
-  title: 'Sentinel Aquasition Tool'
-  description: 'Sentinel Aquasition Tool'
+  title: 'Sentinel Acquisition Tool'
+  description: 'Sentinel Acquisition Tool'
   route_name: satellite_passage
   parent: metsis.services
   weight: 99
