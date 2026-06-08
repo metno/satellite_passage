@@ -28,11 +28,8 @@ class SatellitePassageController extends ControllerBase {
   /**
    * {@inheritdoc}
    */
-  public static function create(ContainerInterface $container) {
-    // $instance = parent::create($container);
-    // $instance->request = $container->get('request_stack');
-    // return $instance;
-    return new static($container->get('request_stack'));
+  public static function create(ContainerInterface $container): self {
+    return new self($container->get('request_stack'));
   }
 
   /**
