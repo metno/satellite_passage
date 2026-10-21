@@ -9,11 +9,11 @@ satellite_passage.configuration:
       type: string
       label: 'Language code'
     lat:
-      type: int
+      type: integer
       label: 'Initial centre latitude for map'
     lon:
-      type: int
+      type: integer
       label: 'Initial centre longitude for map'
     defzoom:
-      type: int
+      type: integer
       label: 'Initial zoom level for map'

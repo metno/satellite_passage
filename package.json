@@ -1,0 +1,17 @@
+{
+  "name": "satellite-passage-map",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "test": "node --test map-app/test/*.test.js"
+  },
+  "dependencies": {
+    "ol": "10.10.0",
+    "proj4": "2.15.0"
+  },
+  "devDependencies": {
+    "vite": "^7.1.7"
+  }
+}

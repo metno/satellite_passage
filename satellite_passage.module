@@ -1,35 +1,34 @@
 <?php
 
+/**
+ * @file
+ * Theme and help hooks for the Satellite Passage module.
+ */
+
 use Drupal\Core\Routing\RouteMatchInterface;
+
 /**
  * Implements hook_help().
  */
-function satellite_passage_help($route_name, RouteMatchInterface $route_match)
-{
-    switch ($route_name) {
-    // Main module help for the metsis_search module.
-    /** TODO: Read help from module's README.md */
-    case 'help.page.satellite_passage':
-      $output = '';
-      $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('Satellite Aquasition Plan') . '</p>';
-      return $output;
-
-    default:
+function satellite_passage_help($route_name, RouteMatchInterface $route_match) {
+  if ($route_name === 'help.page.satellite_passage') {
+    $output = '<h3>' . t('About') . '</h3>';
+    $output .= '<p>' . t('Displays Sentinel-1A, Sentinel-1C, Sentinel-2A, Sentinel-2B, and Sentinel-2C acquisition plans on an interactive map. Use the satellite checkboxes and UTC time sliders to filter passages, then select a passage to view its acquisition details.') . '</p>';
+    return $output;
   }
 }
 
-
-// Implements hook_theme()
-function satellite_passage_theme( $existing, $type, $theme, $path ){
-    return [
-        'satellite_passage-template' => [
-            'render element' => 'container', // To render a simple container element
-            'template' => 'satellite_passage', // My template file name
-            'variables' => [
-                'site_name' => "Default",
-                'helptext' => '',
-              ],
-        ],
-    ];
+/**
+ * Implements hook_theme().
+ */
+function satellite_passage_theme($existing, $type, $theme, $path) {
+  return [
+    'satellite_passage-template' => [
+      'template' => 'satellite_passage',
+      'variables' => [
+        'site_name' => 'Default',
+        'helptext' => '',
+      ],
+    ],
+  ];
 }
