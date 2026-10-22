@@ -1,0 +1,11 @@
+{
+  "map-app/main.js": {
+    "file": "assets/main-D9i7vRzp.js",
+    "name": "main",
+    "src": "map-app/main.js",
+    "isEntry": true,
+    "css": [
+      "assets/main-S9Lo9ICL.css"
+    ]
+  }
+}

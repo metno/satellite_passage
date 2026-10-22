@@ -3,33 +3,32 @@
 namespace Drupal\satellite_passage\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Render\Markup;
+use Drupal\Core\File\FileUrlGeneratorInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * Controller for showing the aquasition plan map.
  */
 class SatellitePassageController extends ControllerBase {
   /**
-   * The request stack service.
+   * The file URL generator.
    *
-   * @var Symfony\Component\HttpFoundation\RequestStack
+   * @var \Drupal\Core\File\FileUrlGeneratorInterface
    */
-  protected $request;
+  protected FileUrlGeneratorInterface $fileUrlGenerator;
 
   /**
    * {@inheritdoc}
    */
-  public function __construct(RequestStack $request) {
-    $this->request = $request;
+  public function __construct(FileUrlGeneratorInterface $file_url_generator) {
+    $this->fileUrlGenerator = $file_url_generator;
   }
 
   /**
    * {@inheritdoc}
    */
   public static function create(ContainerInterface $container): self {
-    return new self($container->get('request_stack'));
+    return new self($container->get('file_url_generator'));
   }
 
   /**
@@ -38,18 +37,15 @@ class SatellitePassageController extends ControllerBase {
   public function render() {
     $config = $this->config('system.site');
     $site_name = $config->get('name');
-    // dpm($site_name);
-    $host = $this->request->getCurrentRequest()->getHost();
-    // dpm($host);
-    /* Handle .ddev.site special for local development */
-    if (str_contains($host, 'ddev.site')) {
-      $host = 'default';
-    }
     $config = $this->config('satellite_passage.configuration');
     $defzoom = $config->get('defzoom');
     $lat = $config->get('lat');
     $lon = $config->get('lon');
-    $helptext = Markup::create($config->get('helptext')['value']);
+    $helptext = [
+      '#type' => 'processed_text',
+      '#text' => $config->get('helptext.value'),
+      '#format' => $config->get('helptext.format'),
+    ];
 
     return [
       '#type' => 'container',
@@ -63,7 +59,7 @@ class SatellitePassageController extends ControllerBase {
 
         'drupalSettings' => [
           'satellite_passage' => [
-            'site_name' => $host,
+            'kmlBaseUrl' => $this->fileUrlGenerator->generateString('public://kml'),
             'lon' => $lon,
             'lat' => $lat,
             'defzoom' => $defzoom,
